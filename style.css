@@ -36,12 +36,9 @@ header div {
   width: 90%;
   margin: auto;
   display: flex;
-  align-items: center;
   position: relative;
-  padding: 1.5rem 1rem;
   margin-bottom: 3rem;
   border-radius: 15px;
-  background-color: white;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1), 0px 5px 5px rgba(0, 0, 0, 0.1);
 }
 .img-search {
@@ -61,7 +58,6 @@ header div {
   border-bottom-right-radius: 15px;
   border-top-right-radius: 15px;
   color: black;
-  font-size: 1.8rem;
 }
 .search input:focus {
   outline: none;
@@ -69,18 +65,16 @@ header div {
 .search input::placeholder {
   color: grey;
   opacity: 1;
-  font-size: 1.8rem;
 }
 .search button {
   position: absolute;
   right: 2%;
-  top: 23%;
+  top: 13%;
   padding: 1rem 1.7rem;
   background-color: #409bff;
   color: white;
   border: none;
   border-radius: 15px;
-  font-size: 1.8rem;
 }
 .content {
   width: 90%;
@@ -121,7 +115,7 @@ header div {
   font-size: 1rem;
 }
 .links {
-  margin: 2rem auto;
+  margin: 3rem auto;
   font-size: 1rem;
 }
 .link {
@@ -132,7 +126,7 @@ header div {
 }
 @media (min-width: 810px) {
   body {
-    padding: 2rem 0rem;
+    padding: 3rem 0rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -142,22 +136,13 @@ header div {
     padding: 0rem 3rem;
   }
   .content {
-    padding: 1rem 3rem;
-  }
-  .user-infos-names {
-    font-size: 2rem;
+    padding: 3rem 3rem;
   }
   .user-infos-img img {
     max-width: 170px;
   }
-  .user-details {
-    font-size: 2rem;
-  }
-  .repos {
-    font-size: 2rem;
-  }
+
   .links {
-    font-size: 2rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
@@ -174,5 +159,21 @@ header div {
   }
   .links {
     font-size: 2rem;
+  }
+  .search button {
+    font-size: 2rem;
+  }
+  .search {
+    padding: 1.8rem 0rem;
+    background: white;
+  }
+  .search input {
+    font-size: 2rem;
+  }
+  .search input::placeholder {
+    font-size: 2rem;
+  }
+  .search button {
+    top: 23%;
   }
 }
