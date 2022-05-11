@@ -34,7 +34,6 @@ async function searchInfo(search) {
     },
   });
   const data = await response.json();
-  console.log(data);
   name.textContent = data.name;
   username.textContent = data.login;
   username.href = data.html_url;
@@ -74,6 +73,5 @@ async function searchInfo(search) {
 button.addEventListener("click", (e) => {
   e.preventDefault();
   const value = e.currentTarget.previousElementSibling.value;
-  console.log(value);
   searchInfo(value);
 });
