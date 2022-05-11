@@ -9,7 +9,7 @@ const bio = document.querySelector(".user-details");
 const repos = document.querySelector(".repo-num");
 const followers = document.querySelector(".followers-num");
 const following = document.querySelector(".following-num");
-const loactionName = document.querySelector(".link1 p");
+const locationName = document.querySelector(".link1 p");
 const link = document.querySelector(".link2 a");
 const twitter = document.querySelector(".link3 p");
 const company = document.querySelector(".link4 p");
@@ -46,9 +46,9 @@ async function searchInfo(search) {
   following.textContent = data.following;
   repos.textContent = data.public_repos;
   if (data.location) {
-    loactionName.textContent = data.location;
+    locationName.textContent = data.location;
   } else {
-    loactionName.classList.add("not-available");
+    locationName.classList.add("not-available");
   }
   if (data.blog) {
     link.textContent = data.blog;
