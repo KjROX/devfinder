@@ -124,6 +124,10 @@ header div {
   gap: 2rem;
   margin: 1rem 0rem;
 }
+.not-available {
+  opacity: 0.4;
+  pointer-events: none;
+}
 @media (min-width: 810px) {
   body {
     padding: 3rem 0rem;
