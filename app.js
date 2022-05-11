@@ -75,3 +75,11 @@ button.addEventListener("click", (e) => {
   const value = e.currentTarget.previousElementSibling.value;
   searchInfo(value);
 });
+
+input.addEventListener("keyup", (e) => {
+  e.preventDefault();
+  if (e.key === "Enter") {
+    const value = e.currentTarget.value;
+    searchInfo(value);
+  }
+});
