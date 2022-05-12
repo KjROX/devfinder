@@ -141,6 +141,9 @@ header div h2 {
   margin: 1rem 0rem;
   color: var(--grey-white);
 }
+.link svg {
+  fill: var(--logo-color);
+}
 .link2 a {
   color: var(--grey-white);
 }
