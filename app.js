@@ -13,7 +13,29 @@ const locationName = document.querySelector(".link1 p");
 const link = document.querySelector(".link2 a");
 const twitter = document.querySelector(".link3 p");
 const company = document.querySelector(".link4 p");
+const link1 = document.querySelector(".link1");
+const link2 = document.querySelector(".link2");
+const link3 = document.querySelector(".link3");
+const link4 = document.querySelector(".link4");
+const theme = document.querySelector("header div");
+const themeName = theme.querySelector("h2");
+const themeImg = theme.querySelector("img");
 //FUNCTIONS
+
+function checkANDremove(a, b) {
+  if (
+    a.classList.contains("not-available") &&
+    b.classList.contains("not-available")
+  ) {
+    a.classList.remove("not-available");
+    b.classList.remove("not-available");
+  }
+}
+
+function add(a, b) {
+  a.classList.add("not-available");
+  b.classList.add("not-available");
+}
 
 function dateConverter(string) {
   let index;
@@ -47,25 +69,33 @@ async function searchInfo(search) {
   repos.textContent = data.public_repos;
   if (data.location) {
     locationName.textContent = data.location;
+    checkANDremove(locationName, link1);
   } else {
-    locationName.classList.add("not-available");
+    add(locationName, link1);
+    locationName.textContent = "NOT AVAILABLE";
   }
   if (data.blog) {
     link.textContent = data.blog;
     link.href = data.blog;
+    checkANDremove(link, link2);
   } else {
     link.href = "#";
-    link.classList.add("not-available");
+    add(link, link2);
+    link.textContent = "NOT AVAILABLE";
   }
   if (data.twitter_username) {
     twitter.textContent = data.twitter_username;
+    checkANDremove(twitter, link3);
   } else {
-    twitter.classList.add("not-available");
+    add(twitter, link3);
+    twitter.textContent = "NOT AVAILABLE";
   }
   if (data.company) {
     company.textContent = data.company;
+    checkANDremove(company, link4);
   } else {
-    company.classList.add("not-available");
+    add(company, link4);
+    company.textContent = "NOT AVAILABLE";
   }
 }
 
@@ -81,5 +111,15 @@ input.addEventListener("keyup", (e) => {
   if (e.key === "Enter") {
     const value = e.currentTarget.value;
     searchInfo(value);
+  }
+});
+theme.addEventListener("click", (e) => {
+  document.body.classList.toggle("dark-theme");
+  if (document.body.classList.contains("dark-theme")) {
+    themeName.textContent = "LIGHT";
+    themeImg.src = "./icons8-sun.svg";
+  } else {
+    themeName.textContent = "DARK";
+    themeImg.src = "./moon.svg";
   }
 });
