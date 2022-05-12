@@ -38,14 +38,7 @@ function add(a, b) {
 }
 
 function dateConverter(string) {
-  let index;
-  for (let i = 0; i < string.length; i++) {
-    if (string[i] === "T") {
-      index = i;
-      break;
-    }
-  }
-  return string.slice(0, index);
+  return string.split("T")[0];
 }
 
 async function searchInfo(search) {
@@ -56,6 +49,7 @@ async function searchInfo(search) {
     },
   });
   const data = await response.json();
+  console.log(data);
   name.textContent = data.name;
   username.textContent = data.login;
   username.href = data.html_url;
@@ -123,3 +117,4 @@ theme.addEventListener("click", (e) => {
     themeImg.src = "./moon.svg";
   }
 });
+searchInfo("octocat");
