@@ -4,7 +4,6 @@ const button = document.querySelector(".search button");
 const name = document.querySelector(".user-infos-names h3");
 const username = document.querySelector(".user-infos-names a");
 const dp = document.querySelector(".user-infos-img img");
-const joiningDate = document.querySelector(".user-infos-names p span");
 const bio = document.querySelector(".user-details");
 const repos = document.querySelector(".repo-num");
 const followers = document.querySelector(".followers-num");
@@ -20,6 +19,9 @@ const link4 = document.querySelector(".link4");
 const theme = document.querySelector("header div");
 const themeName = theme.querySelector("h2");
 const themeImg = theme.querySelector("img");
+const dateDay = document.querySelector(".day");
+const dateMonth = document.querySelector(".month");
+const dateYear = document.querySelector(".year");
 //FUNCTIONS
 
 function checkANDremove(a, b) {
@@ -38,7 +40,23 @@ function add(a, b) {
 }
 
 function dateConverter(string) {
-  return string.split("T")[0];
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const date = new Date(string);
+  const arr = [date.getDate(), monthNames[date.getMonth()], date.getFullYear()];
+  return arr;
 }
 
 async function searchInfo(search) {
@@ -49,14 +67,18 @@ async function searchInfo(search) {
     },
   });
   const data = await response.json();
-  console.log(data);
   name.textContent = data.name;
   username.textContent = data.login;
   username.href = data.html_url;
   dp.src = data.avatar_url;
-  joiningDate.textContent = dateConverter(data.created_at);
-  if (data.bio !== null) {
+  const joiningDate = dateConverter(data.created_at);
+  dateDay.textContent = joiningDate[0];
+  dateMonth.textContent = joiningDate[1];
+  dateYear.textContent = joiningDate[2];
+  if (data.bio) {
     bio.textContent = data.bio;
+  } else {
+    bio.textContent = "No Bio Mentioned";
   }
   followers.textContent = data.followers;
   following.textContent = data.following;
@@ -117,4 +139,4 @@ theme.addEventListener("click", (e) => {
     themeImg.src = "./moon.svg";
   }
 });
-searchInfo("octocat");
+searchInfo("KjROX");
