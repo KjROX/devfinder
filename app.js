@@ -22,6 +22,7 @@ const themeImg = theme.querySelector("img");
 const dateDay = document.querySelector(".day");
 const dateMonth = document.querySelector(".month");
 const dateYear = document.querySelector(".year");
+let darkMode = localStorage.getItem("darkMode");
 //FUNCTIONS
 
 function checkANDremove(a, b) {
@@ -114,6 +115,7 @@ async function searchInfo(search) {
     company.textContent = "NOT AVAILABLE";
   }
 }
+searchInfo("KjROX");
 
 //EVENT-LISTENERS
 button.addEventListener("click", (e) => {
@@ -129,14 +131,22 @@ input.addEventListener("keyup", (e) => {
     searchInfo(value);
   }
 });
+
+if (darkMode === "enabled") {
+  document.body.classList.add("dark-theme");
+  themeName.textContent = "LIGHT";
+  themeImg.src = "./icons8-sun.svg";
+}
+
 theme.addEventListener("click", (e) => {
   document.body.classList.toggle("dark-theme");
   if (document.body.classList.contains("dark-theme")) {
     themeName.textContent = "LIGHT";
     themeImg.src = "./icons8-sun.svg";
+    localStorage.setItem("darkMode", "enabled");
   } else {
     themeName.textContent = "DARK";
     themeImg.src = "./moon.svg";
+    localStorage.setItem("darkMode", "disabled");
   }
 });
-searchInfo("KjROX");
