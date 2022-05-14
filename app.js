@@ -84,7 +84,7 @@ async function fetchApi(search) {
     },
   });
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 function handleReject() {
