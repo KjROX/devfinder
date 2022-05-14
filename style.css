@@ -98,6 +98,7 @@ header div h2 {
   color: red;
   top: 35%;
   right: 30%;
+  display: none;
 }
 
 .search button {
@@ -268,6 +269,7 @@ header div h2 {
 
   .error {
     font-size: 1.5rem;
+    display: block;
   }
 
   .search button {
