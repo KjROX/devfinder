@@ -79,6 +79,12 @@ header div h2 {
   color: var(--grey-white);
   opacity: 1;
 }
+.error {
+  position: absolute;
+  color: red;
+  top: 35%;
+  right: 30%;
+}
 .search button {
   position: absolute;
   right: 2%;
@@ -112,6 +118,9 @@ header div h2 {
 .user-infos-names {
   font-size: 1.5rem;
   color: var(--logo-color);
+}
+.user-infos-names a {
+  color: blue;
 }
 .user-details {
   margin: 1.5rem 0rem;
@@ -151,6 +160,15 @@ header div h2 {
   opacity: 0.5;
   pointer-events: none;
 }
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--logo-color);
+}
 @media (min-width: 810px) {
   body {
     padding: 3rem 0rem;
@@ -172,6 +190,9 @@ header div h2 {
   .links {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+  .flex {
+    font-size: 1.5rem;
   }
 }
 @media (min-width: 1000px) {
@@ -200,7 +221,13 @@ header div h2 {
   .search input::placeholder {
     font-size: 2rem;
   }
+  .error {
+    font-size: 1.5rem;
+  }
   .search button {
     top: 23%;
+  }
+  .flex {
+    font-size: 2rem;
   }
 }

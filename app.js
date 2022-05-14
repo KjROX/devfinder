@@ -22,7 +22,12 @@ const themeImg = theme.querySelector("img");
 const dateDay = document.querySelector(".day");
 const dateMonth = document.querySelector(".month");
 const dateYear = document.querySelector(".year");
+const errorText = document.querySelector(".error");
+const contentText = document.querySelector(".content");
+const rejectHandler = document.querySelector(".rejectHandler");
+const resolveHandler = document.querySelector(".resolveHandler");
 let darkMode = localStorage.getItem("darkMode");
+
 //FUNCTIONS
 
 function checkANDremove(a, b) {
@@ -59,8 +64,11 @@ function dateConverter(string) {
   const arr = [date.getDate(), monthNames[date.getMonth()], date.getFullYear()];
   return arr;
 }
+// function errorHandler(err) {
 
-async function searchInfo(search) {
+// }
+
+async function fetchApi(search) {
   const response = await fetch(`https://api.github.com/users/${search}`, {
     method: "GET",
     headers: {
@@ -68,6 +76,28 @@ async function searchInfo(search) {
     },
   });
   const data = await response.json();
+  console.log(data);
+  return data;
+}
+function handleReject() {
+  resolveHandler.style.display = "none";
+  errorText.textContent = "no result found";
+  rejectHandler.innerHTML = `
+    <span>Oops!!!</span>
+    <div>
+    There is no result found
+    </div>
+    `;
+  rejectHandler.classList.add("flex");
+}
+function undoReject() {
+  resolveHandler.style.display = "block";
+  errorText.textContent = "";
+  rejectHandler.innerHTML = ``;
+  rejectHandler.classList.remove("flex");
+}
+function handleResponse(data) {
+  undoReject();
   name.textContent = data.name;
   username.textContent = data.login;
   username.href = data.html_url;
@@ -113,6 +143,15 @@ async function searchInfo(search) {
   } else {
     add(company, link4);
     company.textContent = "NOT AVAILABLE";
+  }
+}
+async function searchInfo(search) {
+  const data = await fetchApi(search);
+  if (data.message) {
+    handleReject();
+    return;
+  } else {
+    handleResponse(data);
   }
 }
 searchInfo("KjROX");
