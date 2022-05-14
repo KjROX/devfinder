@@ -1,6 +1,7 @@
 //Variables
 const input = document.querySelector(".search input");
 const button = document.querySelector(".search button");
+
 const name = document.querySelector(".user-infos-names h3");
 const username = document.querySelector(".user-infos-names a");
 const dp = document.querySelector(".user-infos-img img");
@@ -8,24 +9,32 @@ const bio = document.querySelector(".user-details");
 const repos = document.querySelector(".repo-num");
 const followers = document.querySelector(".followers-num");
 const following = document.querySelector(".following-num");
-const locationName = document.querySelector(".link1 p");
-const link = document.querySelector(".link2 a");
-const twitter = document.querySelector(".link3 p");
-const company = document.querySelector(".link4 p");
-const link1 = document.querySelector(".link1");
-const link2 = document.querySelector(".link2");
-const link3 = document.querySelector(".link3");
-const link4 = document.querySelector(".link4");
+
+const locationEl = document.querySelector(".locationEl");
+const locationName = document.querySelector(".locationEl p");
+
+const companyEl = document.querySelector(".companyEl");
+const companyName = document.querySelector(".companyEl p");
+
+const profileEl = document.querySelector(".profileLinkEl");
+const profileLink = document.querySelector(".profileLinkEl a");
+
+const twitterProfileEl = document.querySelector(".twitterProfileEl");
+const twitterProfileLink = document.querySelector(".twitterProfileEl a");
+
 const theme = document.querySelector("header div");
 const themeName = theme.querySelector("h2");
 const themeImg = theme.querySelector("img");
+
 const dateDay = document.querySelector(".day");
 const dateMonth = document.querySelector(".month");
 const dateYear = document.querySelector(".year");
+
 const errorText = document.querySelector(".error");
 const contentText = document.querySelector(".content");
 const rejectHandler = document.querySelector(".rejectHandler");
 const resolveHandler = document.querySelector(".resolveHandler");
+
 let darkMode = localStorage.getItem("darkMode");
 
 //FUNCTIONS
@@ -40,9 +49,8 @@ function checkANDremove(a, b) {
   }
 }
 
-function add(a, b) {
-  a.classList.add("not-available");
-  b.classList.add("not-available");
+function addNotAvailableClassname(...elements) {
+  elements.forEach((el) => el.classList.add("not-available"));
 }
 
 function dateConverter(string) {
@@ -76,7 +84,7 @@ async function fetchApi(search) {
     },
   });
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 function handleReject() {
@@ -111,38 +119,46 @@ function handleResponse(data) {
   } else {
     bio.textContent = "No Bio Mentioned";
   }
+
   followers.textContent = data.followers;
   following.textContent = data.following;
   repos.textContent = data.public_repos;
+
   if (data.location) {
     locationName.textContent = data.location;
-    checkANDremove(locationName, link1);
+    checkANDremove(locationName, locationEl);
   } else {
-    add(locationName, link1);
+    addNotAvailableClassname(locationName, locationEl);
     locationName.textContent = "NOT AVAILABLE";
   }
+
   if (data.blog) {
-    link.textContent = data.blog;
-    link.href = data.blog;
-    checkANDremove(link, link2);
+    profileLink.textContent = data.blog;
+    profileLink.href = data.blog;
+    checkANDremove(profileLink, profileEl);
   } else {
-    link.href = "#";
-    add(link, link2);
-    link.textContent = "NOT AVAILABLE";
+    profileLink.href = "#";
+    addNotAvailableClassname(profileLink, profileEl);
+    profileLink.textContent = "NOT AVAILABLE";
   }
+
   if (data.twitter_username) {
-    twitter.textContent = data.twitter_username;
-    checkANDremove(twitter, link3);
+    const profile = `https://twitter.com/${data.twitter_username}`;
+    twitterProfileLink.href = profile;
+    twitterProfileLink.textContent = data.twitter_username;
+    checkANDremove(twitterProfileLink, twitterProfileEl);
   } else {
-    add(twitter, link3);
-    twitter.textContent = "NOT AVAILABLE";
+    addNotAvailableClassname(twitterProfileLink, twitterProfileEl);
+    twitterProfileLink.textContent = "NOT AVAILABLE";
+    twitterProfileLink.href = "#";
   }
+
   if (data.company) {
-    company.textContent = data.company;
-    checkANDremove(company, link4);
+    companyName.textContent = data.company;
+    checkANDremove(companyName, companyEl);
   } else {
-    add(company, link4);
-    company.textContent = "NOT AVAILABLE";
+    addNotAvailableClassname(companyName, companyEl);
+    companyName.textContent = "NOT AVAILABLE";
   }
 }
 async function searchInfo(search) {
