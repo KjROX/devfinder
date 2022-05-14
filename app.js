@@ -1,6 +1,7 @@
 //Variables
 const input = document.querySelector(".search input");
 const button = document.querySelector(".search button");
+
 const name = document.querySelector(".user-infos-names h3");
 const username = document.querySelector(".user-infos-names a");
 const dp = document.querySelector(".user-infos-img img");
@@ -8,24 +9,32 @@ const bio = document.querySelector(".user-details");
 const repos = document.querySelector(".repo-num");
 const followers = document.querySelector(".followers-num");
 const following = document.querySelector(".following-num");
-const locationName = document.querySelector(".locationEl p");
-const link = document.querySelector(".profileLinkEl a");
-const twitter = document.querySelector(".twitterProfileEl p");
-const companyName = document.querySelector(".companyEl p");
+
 const locationEl = document.querySelector(".locationEl");
-const profileLinkEl = document.querySelector(".profileLinkEl");
-const twitterProfileEl = document.querySelector(".twitterProfileEl");
+const locationName = document.querySelector(".locationEl p");
+
 const companyEl = document.querySelector(".companyEl");
+const companyName = document.querySelector(".companyEl p");
+
+const profileEl = document.querySelector(".profileLinkEl");
+const profileLink = document.querySelector(".profileLinkEl a");
+
+const twitterProfileEl = document.querySelector(".twitterProfileEl");
+const twitterProfileLink = document.querySelector(".twitterProfileEl a");
+
 const theme = document.querySelector("header div");
 const themeName = theme.querySelector("h2");
 const themeImg = theme.querySelector("img");
+
 const dateDay = document.querySelector(".day");
 const dateMonth = document.querySelector(".month");
 const dateYear = document.querySelector(".year");
+
 const errorText = document.querySelector(".error");
 const contentText = document.querySelector(".content");
 const rejectHandler = document.querySelector(".rejectHandler");
 const resolveHandler = document.querySelector(".resolveHandler");
+
 let darkMode = localStorage.getItem("darkMode");
 
 //FUNCTIONS
@@ -40,9 +49,8 @@ function checkANDremove(a, b) {
   }
 }
 
-function add(a, b) {
-  a.classList.add("not-available");
-  b.classList.add("not-available");
+function addNotAvailableClassname(...elements) {
+  elements.forEach((el) => el.classList.add("not-available"));
 }
 
 function dateConverter(string) {
@@ -111,37 +119,45 @@ function handleResponse(data) {
   } else {
     bio.textContent = "No Bio Mentioned";
   }
+
   followers.textContent = data.followers;
   following.textContent = data.following;
   repos.textContent = data.public_repos;
+
   if (data.location) {
     locationName.textContent = data.location;
     checkANDremove(locationName, locationEl);
   } else {
-    add(locationName, locationEl);
+    addNotAvailableClassname(locationName, locationEl);
     locationName.textContent = "NOT AVAILABLE";
   }
+
   if (data.blog) {
-    link.textContent = data.blog;
-    link.href = data.blog;
-    checkANDremove(link, profileLinkEl);
+    profileLink.textContent = data.blog;
+    profileLink.href = data.blog;
+    checkANDremove(profileLink, profileEl);
   } else {
-    link.href = "#";
-    add(link, profileLinkEl);
-    link.textContent = "NOT AVAILABLE";
+    profileLink.href = "#";
+    addNotAvailableClassname(profileLink, profileEl);
+    profileLink.textContent = "NOT AVAILABLE";
   }
+
   if (data.twitter_username) {
-    twitter.textContent = data.twitter_username;
-    checkANDremove(twitter, twitterProfileEl);
+    const profile = `https://twitter.com/${data.twitter_username}`;
+    twitterProfileLink.href = profile;
+    twitterProfileLink.textContent = data.twitter_username;
+    checkANDremove(twitterProfileLink, twitterProfileEl);
   } else {
-    add(twitter, twitterProfileEl);
-    twitter.textContent = "NOT AVAILABLE";
+    addNotAvailableClassname(twitterProfileLink, twitterProfileEl);
+    twitterProfileLink.textContent = "NOT AVAILABLE";
+    twitterProfileLink.href = "#";
   }
+
   if (data.company) {
     companyName.textContent = data.company;
     checkANDremove(companyName, companyEl);
   } else {
-    add(companyName, companyEl);
+    addNotAvailableClassname(companyName, companyEl);
     companyName.textContent = "NOT AVAILABLE";
   }
 }

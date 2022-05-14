@@ -180,7 +180,8 @@ header div h2 {
   fill: var(--logo-color);
 }
 
-.profileLinkEl a {
+.profileLinkEl a,
+.twitterProfileEl a {
   color: var(--grey-white);
 }
 
