@@ -175,7 +175,8 @@ searchInfo("KjROX");
 //EVENT-LISTENERS
 button.addEventListener("click", (e) => {
   e.preventDefault();
-  const value = e.currentTarget.previousElementSibling.value;
+  const value = input.value;
+  console.log(value);
   searchInfo(value);
 });
 
