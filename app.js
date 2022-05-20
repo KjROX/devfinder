@@ -176,7 +176,6 @@ searchInfo("KjROX");
 button.addEventListener("click", (e) => {
   e.preventDefault();
   const value = input.value;
-  console.log(value);
   searchInfo(value);
 });
 
